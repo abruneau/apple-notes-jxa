@@ -1,0 +1,7 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "no-namespace": [true, "allow-declarations"],
+    "no-shadowed-variable": false
+  }
+}

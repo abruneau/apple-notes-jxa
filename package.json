@@ -1,0 +1,41 @@
+{
+  "name": "apple-notes-jxa",
+  "version": "0.0.0",
+  "description": "apple-notes-jxa",
+  "license": "MIT",
+  "repository": "https://github.com/abruneau/apple-notes-jxa.git",
+  "author": "Antonin Bruneau",
+  "keywords": [
+    "JXA, Apple Notes, npm, node"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+    "watch": "npm run build -- --watch",
+    "watch:test": "npm run test -- --watch"
+  },
+  "dependencies": {
+    "osa2": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.0.0",
+    "@types/node": "8.0.31",
+    "chai": "^4.1.2",
+    "mocha": "^3.0.0",
+    "rimraf": "^2.0.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "typescript": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}
