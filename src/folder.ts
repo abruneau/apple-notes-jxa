@@ -125,18 +125,7 @@ export class Folder {
    * @return {Promise<Note>}      New Note
    */
   public createNote(name: string): Promise<Note> {
-    return osa((noteName, folderId) => {
-      const Notes = Application("Notes");
-      const folder = Notes.folders.byId(folderId);
-      const newNote = Notes.Note({ name: noteName });
-      folder.notes.push(newNote);
-      return {
-        body: newNote.body(),
-        creationDate: newNote.creationDate(),
-        id: newNote.id(),
-        modificationDate: newNote.modificationDate(),
-        name: newNote.name(),
-      };
-    })(name, this.id).then((note) => new Note(note));
+    const note = new Note({ name });
+    return note.create(this.id);
   }
 }

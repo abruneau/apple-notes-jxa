@@ -28,15 +28,39 @@ export class Note {
   public id: string;
   public name: string;
   public body: string;
-  public creationDate: string;
-  public modificationDate: string;
+  public creationDate: Date;
+  public modificationDate: Date;
 
   constructor(object?: any) {
     this.id = object.id;
     this.name = object.name;
     this.body = object.body;
-    this.creationDate = object.creationDate;
-    this.modificationDate = object.modificationDate;
+    this.creationDate = object.creationDate instanceof Date ? object.creationDate : new Date(object.creationDate);
+    this.modificationDate = object.modificationDate instanceof Date ? object.modificationDate : new Date(object.modificationDate);
+  }
+
+  /**
+   * Create a new Note in a folder
+   * @param  {string}        folderId The Folder Id
+   * @return {Promise<Note>}          The new Note
+   */
+  public create(folderId: string): Promise<Note> {
+    return osa((note, folderId) => {
+      const Notes = Application("Notes");
+      const folder = Notes.folders.byId(folderId);
+      const newNote = Notes.Note({
+        body: note.body,
+        name: note.name,
+      });
+      folder.notes.push(newNote);
+      return {
+        body: newNote.body(),
+        creationDate: newNote.creationDate(),
+        id: newNote.id(),
+        modificationDate: newNote.modificationDate(),
+        name: newNote.name(),
+      };
+    })(this, folderId).then((note) => new Note(note));
   }
 
   /**
