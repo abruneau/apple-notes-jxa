@@ -25,6 +25,27 @@ export function notes(): Promise<Note[]> {
 
 export class Note {
 
+  public static findByName(name: string, folderId: string): Promise<Note> {
+    return osa((name, folderId) => {
+      const Notes = Application("Notes");
+      const folder = Notes.folders.byId(folderId);
+      const notes = folder.notes.where({
+        name,
+      });
+
+      if (!notes.length) {
+        throw new Error(`Note ${name} note found`);
+      }
+      return {
+        body: notes[0].body(),
+        creationDate: notes[0].creationDate(),
+        id: notes[0].id(),
+        modificationDate: notes[0].modificationDate(),
+        name: notes[0].name(),
+      };
+    })(name, folderId).then((note) => new Note(note));
+  }
+
   public id: string;
   public name: string;
   public body: string;

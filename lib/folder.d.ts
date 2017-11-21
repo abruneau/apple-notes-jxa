@@ -8,5 +8,6 @@ export declare class Folder {
     constructor(object?: any);
     delete(): Promise<any>;
     notes(): Promise<Note[]>;
+    findNote(name: string): Promise<Note>;
     createNote(name: string): Promise<Note>;
 }

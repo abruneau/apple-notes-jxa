@@ -119,6 +119,10 @@ export class Folder {
     });
   }
 
+  public findNote(name: string): Promise<Note> {
+    return Note.findByName(name, this.id);
+  }
+
   /**
    * Create a note in the Folder
    * @param  {string}        name Folder Name
