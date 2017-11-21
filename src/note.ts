@@ -73,7 +73,6 @@ export class Note {
       const oldNote = Notes.notes.byId(note.id);
       oldNote.name = note.name;
       oldNote.body = note.body;
-      oldNote.save();
       return {
         body: oldNote.body(),
         creationDate: oldNote.creationDate(),

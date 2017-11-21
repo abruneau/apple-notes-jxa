@@ -9,13 +9,13 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "./lib",
+    "outDir": "./",
     "preserveConstEnums": true,
     "removeComments": true,
     "noImplicitAny": false
   },
   "include": [
-    "src/**/*"
+    "*"
   ],
   "exclude": [
     "node_modules",
